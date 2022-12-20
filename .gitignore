@@ -1,0 +1,4 @@
+stage3-*.tar.xz
+build/
+gentoo/
+output/
