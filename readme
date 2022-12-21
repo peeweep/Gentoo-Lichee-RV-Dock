@@ -1,0 +1,13 @@
+Gentoo Linux bootable image for Lichee RV Dock
+
+You can dd this stage3 image to SD Card, root password: licheerv, serial console only currently.
+
+Image download: https://dev.onfoo.top/~peeweep/lichee-rv-dock/20221221/
+
+TODO:
+ * use crossdev bootstrap rootfs from world
+ * nightly build ci
+
+Thanks:
+ * Tim Molteno's Debian Image Build Project: https://github.com/tmolteno/d1_build
+ * smaeul's kernel, u-boot: https://github.com/smaeul
