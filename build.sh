@@ -11,9 +11,10 @@ sudo mkdir -pv gentoo
 # sudo riscv64-unknown-linux-gnu-emerge --ask `cat world `
 
 # rootfs way2: use stage3 (for quick test)
-if [ ! -f ./stage3-rv64_lp64d-systemd-20221216T100220Z.tar.xz ] ; then
-  # wget https://mirror.init7.net/gentoo/releases/riscv/autobuilds/current-stage3-rv64_lp64d-systemd/stage3-rv64_lp64d-systemd-20221216T100220Z.tar.xz
-  wget https://mirrors.bfsu.edu.cn/gentoo/releases/riscv/autobuilds/current-stage3-rv64_lp64d-systemd/stage3-rv64_lp64d-systemd-20221216T100220Z.tar.xz
+if [ ! -f ./stage3-rv64_lp64d-systemd-*.tar.xz ] ; then
+  export download_url_prefix=https://distfiles.gentoo.org/releases/riscv/autobuilds
+  export latest_stage3_path=$(curl -sSL ${download_url_prefix}/latest-stage3.txt | grep stage3-rv64_lp64d-systemd | awk '{ print $1 }' | head -n 1)
+  wget ${download_url_prefix}/${latest_stage3_path}
 fi
 pushd gentoo
   sudo tar xpvf ../stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner
