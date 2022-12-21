@@ -4,7 +4,7 @@ You can dd this stage3 image to SD Card, root password: licheerv, serial console
 
 Image download: https://dev.onfoo.top/~peeweep/lichee-rv-dock/20221221/
 
-TODO:
+Still working in progress, TODO:
  * use crossdev bootstrap rootfs from world
  * nightly build ci
 
