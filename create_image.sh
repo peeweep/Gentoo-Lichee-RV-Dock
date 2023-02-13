@@ -17,13 +17,12 @@ IMG=${OUTPORT}/${IMG_NAME}
 
 echo "Creating Blank Image ${IMG}"
 
-dd if=/dev/zero of=${IMG} bs=1M count=5000
+dd if=/dev/zero of=${IMG} bs=1M count=4000
 
 # Setup Loopback device
-LOOP=`losetup -f --show ${IMG} | cut -d'/' -f3`
+LOOP=$(losetup -f --show ${IMG} | cut -d'/' -f3)
 LOOPDEV=/dev/${LOOP}
 echo "Partitioning loopback device ${LOOPDEV}"
-
 
 # dd if=/dev/zero of=${LOOPDEV} bs=1M count=200
 parted -s -a optimal -- ${LOOPDEV} mklabel gpt
@@ -60,7 +59,6 @@ cp build/u-boot/arch/riscv/dts/sun20i-d1-lichee-rv-dock.dtb "${BOOTPOINT}/"
 umount ${BOOTPOINT}
 rm -rf ${BOOTPOINT}
 
-
 # Now create the root partition
 MNTPOINT="rootfs"
 mkdir -p ${MNTPOINT}
@@ -69,9 +67,8 @@ mount /dev/mapper/${LOOP}p2 ${MNTPOINT}
 # Copy the rootfs
 cp -a gentoo/* ${MNTPOINT}
 
-
 # Set up fstab
-cat >> "${MNTPOINT}/etc/fstab" <<EOF
+cat >>"${MNTPOINT}/etc/fstab" <<EOF
 # <device>        <dir>        <type>        <options>            <dump> <pass>
 /dev/mmcblk0p1    /boot        ext2          rw,defaults,noatime  1      1
 /dev/mmcblk0p2    /            ext4          rw,defaults,noatime  1      1
@@ -89,4 +86,7 @@ losetup -d ${LOOPDEV}
 # Now compress the image
 echo "Compressing the image: ${IMG}"
 
-(cd ${OUTPORT}; xz -T0 ../${IMG})
+(
+  cd ${OUTPORT}
+  xz -T0 ../${IMG}
+)
