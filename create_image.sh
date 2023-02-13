@@ -17,7 +17,7 @@ IMG=${OUTPORT}/${IMG_NAME}
 
 echo "Creating Blank Image ${IMG}"
 
-dd if=/dev/zero of=${IMG} bs=1M count=4000
+dd if=/dev/zero of=${IMG} bs=1M count=5000
 
 # Setup Loopback device
 LOOP=`losetup -f --show ${IMG} | cut -d'/' -f3`
@@ -89,4 +89,4 @@ losetup -d ${LOOPDEV}
 # Now compress the image
 echo "Compressing the image: ${IMG}"
 
-(cd ${OUTPORT}; xz -9 ${IMG})
+(cd ${OUTPORT}; xz -T0 ../${IMG})

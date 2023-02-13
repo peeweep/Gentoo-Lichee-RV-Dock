@@ -1,0 +1,9 @@
+[submodule "kernel/linux"]
+	path = kernel/linux
+	url = git@github.com:T-head-Semi/linux.git
+[submodule "kernel/smaeul-uboot"]
+	path = kernel/smaeul-uboot
+	url = https://github.com/smaeul/u-boot.git
+[submodule "kernel/opensbi"]
+	path = kernel/opensbi
+	url = https://github.com/riscv-software-src/opensbi
